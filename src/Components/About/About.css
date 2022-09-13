@@ -1,0 +1,30 @@
+.auction-section{
+  background-color: #3a1f05 !important;
+  background-image: url(../../assets/images/tra1.gif);
+
+}
+
+.page-header-section{
+    background-image: url(../../assets/images/tra.gif) !important;
+  background-color: #3a1f05 !important;
+}
+
+.account-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-img img{
+    border-radius: 10px;
+
+}
+
+.nft-item .nft-inner {
+	padding: 20px;
+	background-color: #3a1f05 !important;
+    border: 2px solid #f5bf00;
+	box-shadow: 0 0 10px rgba(3, 0, 16, .2);
+	border-radius: 5px;
+	
+}

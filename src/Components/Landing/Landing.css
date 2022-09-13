@@ -1,0 +1,280 @@
+.home-4{
+    background-image: url(../../assets/images/tra.gif);
+  background-color: #3a1f05 !important;
+
+    width: 100% !important;
+}
+
+.section-header.style-4 h3{
+  background-color: #3a1f05 !important;
+  border: 1px solid rgb(243 167 53);
+}
+
+.wallet-section{
+    /* background-color: rgb(45,21,103); */
+  background-color: #3a1f05 !important;
+  background-image: url(../../assets/images/tra1.gif);
+
+}
+
+.mySwiper{
+    width: 90%;
+    height: 80vh !important;
+}
+
+.carde{
+    background-color: #3a1f05;
+    border: 2px solid yellow;
+    border-radius: 30px 0px !important;
+    /* padding: 25px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.tittl{
+    font-size: 30px;
+    text-align: center;
+}
+
+.inner{
+    border-radius: 30px;
+    background-color: #3a1f05;
+    border: none;
+}
+
+.emg{
+    border-radius: 30px;
+}
+
+@media screen and (max-width:325px) {
+    .mySwiper{
+        width: auto;
+        height: auto;
+    }
+
+    .carde{
+        display: flex;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .emg{
+        width: 90%;
+        align-items: center;
+        margin-left: 14px;
+    }
+}
+
+@media (min-width:325px) and (max-width:375px) {
+    .mySwiper{
+        width: 80%;
+        height: 80% !important;
+    }
+
+    .carde{
+        display: flex;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .emg{
+        width: 80%;
+        align-items: center;
+        margin-left: 25px !important;
+        margin-top: 15px;
+    }
+    
+}
+
+@media (min-width:376px) and (max-width:425px) {
+
+    .carde{
+        display: flex;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .emg{
+        width: 80%;
+        align-items: center;
+        margin-left: 30px;
+        margin-top: 45px;
+    }
+
+    .mySwiper{
+    width: 80%;
+    height: 80% !important;
+    }
+
+    .tittl{
+        padding-bottom: -5px;
+        font-size: 20px;
+    }
+}
+
+
+@media (min-width:426px) and (max-width:600px) {
+    .mySwiper{
+        width: auto;
+        height: auto;
+    }
+
+    .carde{
+        display: flex;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .emg{
+        width: 90%;
+        align-items: center;
+        margin-left: 20px;
+        margin-top: 45px;
+    }
+
+    .mySwiper{
+    width: 90%;
+    height: 80vh !important;
+    }
+
+    .tittl{
+        padding-bottom: 10px;
+    }
+}
+
+@media (min-width:600px) and (max-width:800px) {
+    .mySwiper{
+        width: 60% !important;
+        height: 100vh !important;
+    }
+
+    .carde{
+        display: flex;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .emg{
+        width: 87%;
+        align-items: center;
+        margin-left: 30px;
+        margin-top: 45px;
+    }
+
+    .mySwiper{
+    width: 90%;
+    height: 80vh !important;
+    }
+
+    .tittl{
+        padding-bottom: 10px;
+    }
+}
+
+@media (min-width:800px) and (max-width:1200px) {
+
+    .home-4{
+        width: 100% !important;
+    }
+
+    .carde{
+        display: flex;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .emg{
+        width: 87%;
+        align-items: center;
+        margin-left: 20px;
+        margin-top: 45px;
+    }
+
+    .mySwiper{
+    width: 90%;
+    height: 56vh !important;
+    }
+
+    .tittl{
+        padding-bottom: 10px;
+    }
+}
+
+
+ @media (min-width:1200px) and (max-width:1440px) {
+    .wallet-section{
+        background-color: #3a1f05;
+    }
+    
+    .mySwiper{
+        width: 90%;
+        height: 80vh !important;
+    }
+    
+    .carde{
+        background-color: #3a1f05;
+        border: 2px solid yellow;
+        border-radius: 30px 0px;
+        /* padding: 25px; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+    }
+    
+    .tittl{
+        font-size: 30px;
+        text-align: center;
+    }
+    
+    .inner{
+        border-radius: 30px 0px;
+        background-color: #3a1f05;
+        border: none;
+    }
+    
+    .emg{
+        border-radius: 30px;
+    }
+} 
+
+
+@media (min-width:1440px) and (max-width:4000px) {
+
+    .home-4{
+        width: 100% !important;
+    }
+
+    .carde{
+        display: flex;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .emg{
+        width: 87%;
+        align-items: center;
+        margin-left: 20px;
+        margin-top: 45px;
+    }
+
+    .mySwiper{
+    width: 90%;
+    height: 40vh !important;
+    }
+
+    .tittl{
+        padding-bottom: 10px;
+    }
+}
+
+
+
+
+.wallet-item.home-4 {
+    border-color: rgb(243 167 53) !important;
+    background-color: #3a1f05 !important;
+}
+/*  */

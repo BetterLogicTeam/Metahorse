@@ -1,0 +1,14 @@
+.footer-section{
+    background-color: #3a1f05 !important;
+  background-image: url(../../assets/images/tra1.gif);
+}
+
+@media screen and (max-width:600px) {
+    .footer-section{
+        text-align: center;
+    }
+
+    .footer-link-item h5{
+        margin-top: 17px;
+    }
+}
