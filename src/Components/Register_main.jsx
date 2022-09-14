@@ -10,8 +10,9 @@ import { tokenAddress, tokenAbi } from '../Utils/token'
 import { contractAddress, contractAbi } from '../Utils/contract'
 import { Spinner } from './';
 import { toast } from 'react-toastify';
+import { wireNftContractAbi, wireNftContractAddress } from '../utilies/constant.js';
 function Register_main({ notify }) {
-  const [loader,setloader] = useState(false)
+    const [loader, setloader] = useState(false)
     const navigate = useNavigate();
     let [matic, setmatic] = useState(0)
     let [ule, setule] = useState(0)
@@ -19,10 +20,10 @@ function Register_main({ notify }) {
     const [address, setaddress] = useState('');
     const [connected, setconnected] = useState('MetaMask is not connected..!..Wait...')
 
-    const callapi = async (position,sellCall) => {
-    setloader(true)
+    const callapi = async (position, sellCall) => {
+        setloader(true)
 
-console.log("position",position);
+        console.log("position", position);
         let res = await axios.post('https://ulematic-api.herokuapp.com/registration',
             {
                 sid: uid,
@@ -33,7 +34,7 @@ console.log("position",position);
                 // traxn: "0x2636a0fa8327fdad7c0441b038838749cec83211bdbe955d278fbc58e1d1bace"
 
             });
-        console.log("reg_Api",res)
+        console.log("reg_Api", res)
         if (res.data.data == 'Accountnumber already exists in joinnow_temp !!') {
             toast.error('Account Already Resgistered with this ID')
             navigate('/Login_main')
@@ -44,31 +45,31 @@ console.log("position",position);
             toast.success('Registered Successfully')
             // localStorage.setItem('user_Id', uid)
 
-       setTimeout(() => {
-        callLoginApi()
-       }, 50000);
+            setTimeout(() => {
+                callLoginApi()
+            }, 50000);
 
         }
-    setloader(false)
+        setloader(false)
     }
     const callLoginApi = async () => {
-    setloader(true)
-        console.log("address",address)
+        setloader(true)
+        console.log("address", address)
         let res = await axios.get(`https://ulematic-api.herokuapp.com/login?id='${address}'`);
-        console.log("login_data",res)
+        console.log("login_data", res)
         if (res.data.data !== 0) {
-           
+
             localStorage.setItem("isAuthenticated", true);
-            localStorage.setItem("user", JSON.stringify(res.data.data));  
+            localStorage.setItem("user", JSON.stringify(res.data.data));
             toast.success('Login Successfully')
 
             navigate('/Dashboard/Home')
         }
-        else{
+        else {
             toast.error("Something went wrong ! ");
-      
-          }
-    setloader(false)
+
+        }
+        setloader(false)
     }
     const ConnectToMetaMask = async () => {
         let acc = await loadWeb3();
@@ -85,7 +86,7 @@ console.log("position",position);
 
     }
     const cotractCall = async (position) => {
-    setloader(true)
+        setloader(true)
         let acc = await loadWeb3();
         if (acc == 'No Wallet') {
             toast.error('No Wallet')
@@ -96,27 +97,27 @@ console.log("position",position);
         else {
             setaddress(acc)
             setconnected('MetaMask is connected... Ready To Register')
-            
-            ule=ule.toString()
-            ule= window.web3.utils.toWei(ule)
-            matic=matic.toString()
-            matic= window.web3.utils.toWei(matic)
+
+            ule = ule.toString()
+            ule = window.web3.utils.toWei(ule)
+            matic = matic.toString()
+            matic = window.web3.utils.toWei(matic)
             try {
-                let contract = await new window.web3.eth.Contract(contractAbi, contractAddress)
+                let contract = await new window.web3.eth.Contract(wireNftContractAbi, wireNftContractAddress)
                 let token = await new window.web3.eth.Contract(tokenAbi, tokenAddress)
-                let approveCall = await token.methods.approve(contractAddress, ule).send({ from: acc });
+                let approveCall = await token.methods.approve(wireNftContractAddress, ule).send({ from: acc });
                 toast.success('Approved')
                 let sellCall = await contract.methods.sell(ule).send({ from: acc, value: matic });
                 toast.success('Transection Succesfull')
                 sellCall = sellCall.transactionHash
-                callapi(position,sellCall)
+                callapi(position, sellCall)
             }
             catch (err) {
                 console.log("error while calling fuction sell", err)
             }
 
         }
-    setloader(false)
+        setloader(false)
     }
     const callMaticUrliApi = async () => {
         let res = await axios.get(`https://ulematic.herokuapp.com/live_rate_matic`);
@@ -132,12 +133,12 @@ console.log("position",position);
     }
 
     useEffect(() => {
-    setloader(true)
+        setloader(true)
         ConnectToMetaMask();
         callUleApi();
         callMaticUrliApi();
-        
-    setloader(false)
+
+        setloader(false)
     }, [])
 
     return (
@@ -151,7 +152,7 @@ console.log("position",position);
 
         //                         <img src="favicon.png" width="150px" alt="" />
         //         { connected=='MetaMask is not connected..!..Wait...' ? <p className='peera2 pt-3' style={{color:'red'}}>{connected}</p> : <p className='peera2 pt-3' style={{color:'green'}}>{connected}</p>}
-                                
+
 
         //                         <div className="batan">
         //                             <button className="btn log_batan" onClick={() => {
@@ -159,7 +160,7 @@ console.log("position",position);
         //                                 modelRegister.classList.remove('d-none')
         //                                 modelRegister.classList.add('d-flex')
         //                             }}>Register</button>
-                                    
+
         //                             <div className=' w-100 h-100 d-none justify-content-center align-items-center  position-absolute  modelRegister'>
         //                                 <div className=' bg-white bord border-dark py-3 px-5 flex-column justify-content-center align-items-center d-flex'>
         //                                     <h4 className=' text-dark fs-5 my-3'>Enter Upline ID</h4>
@@ -256,99 +257,99 @@ console.log("position",position);
 
 
 
-        <div class="wrapper " style={{marginTop: "0px",height:'115vh'}}>
-        <section class="login-content">
-            <div class="container h-100">
-                <div class="row align-items-center justify-content-center h-100">
-                    <div class="col-12">
-                        <div class="row align-items-center">
-                            <div class="col-lg-6 ">
-                                <div class="back_login">
-                                <h2 class="mb-2">Sign Up</h2>
-                                <p>Enter your personal details and start journey with us.</p>
-                                <div id="error-msg"></div>
-                                 <form action="#" class="login-signup-form form-signin" method="post">  <div class="alert alert-block alert-danger error-login-t" id="ajax_message" style={{display:"none"}}>
-                                     
-                                 </div>
-                                    <div class="form-group">
-                                        <div id="ajax_loading" align="center"></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="floating-label form-group">
-                                                <input class="form-control" data-val="true" data-val-length="The field sponser_id must be a string with a minimum length of 4 and a maximum length of 12." data-val-length-max="12" data-val-length-min="4" data-val-required="Sponser Id is required" id="sponser_id" maxlength="6" name="sponser_id" oninput="return numbervalidation(this)" placeholder="Enter Sponsor Id" required="required" type="text" value=""/>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="floating-label form-group">
-                                                <input class="form-control floating-input" id="sponsername" name="sponsername" placeholder="Sponsor Name" readonly="true" type="text" value=""/>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-lg-6">
-                                            <div class="floating-label form-group">
-                                                <input class="form-control" data-val="true" data-val-length="The field User name must be a string with a minimum length of 1 and a maximum length of 50." data-val-length-max="50" data-val-length-min="1" data-val-required="The User name field is required." id="f_name" name="f_name" oninput="return namevalidation(this)" placeholder="User Name" required="required" type="text" value=""/>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="floating-label form-group">
-                                                <input class="floating-input form-control" data-val="true" data-val-required="Mobile number is required" id="mobile" maxlength="10" name="mobile" oninput="return numbervalidation(this)" placeholder="Mobile Number" required="required" type="text" value=""/>
-                                            </div>
-                                        </div>
+        <div class="wrapper " style={{ marginTop: "0px", height: '115vh' }}>
+            <section class="login-content">
+                <div class="container h-100">
+                    <div class="row align-items-center justify-content-center h-100">
+                        <div class="col-12">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 ">
+                                    <div class="back_login">
+                                        <h2 class="mb-2">Sign Up</h2>
+                                        <p>Enter your personal details and start journey with us.</p>
+                                        <div id="error-msg"></div>
+                                        <form action="#" class="login-signup-form form-signin" method="post">  <div class="alert alert-block alert-danger error-login-t" id="ajax_message" style={{ display: "none" }}>
 
-                                        <div class="col-lg-6">
-                                            <div class="floating-label form-group">
-                                                <input class="form-control input-log-cls" data-val="true" data-val-email="Invalid Email Address" id="email" name="email" placeholder="example@gmail.com" required="required" type="text" value=""/>
-                                            </div>
                                         </div>
-                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <div id="ajax_loading" align="center"></div>
+                                            </div>
                                             <div class="row">
-                                                <div class="col-md-12 col-lg-12" id="sendbtndiv">
-                                                    <button type="button" id="sendotpbtn" class="btn btn-success mb-2 btn-md">Send OTP For Email Verification</button>
-                                                </div>
-                                                <div class="col-md-6" id="resendbtndiv" style={{display:"none"}}>
-                                                    <button type="button" id="resendotpbtn" class="btn btn-success btn-md">Resend OTP</button>
-                                                </div>
-                                                <div class="col-md-6" id="otpdiv" style={{display:"none"}}>
+                                                <div class="col-lg-6">
                                                     <div class="floating-label form-group">
-                                                        <input class="floating-input form-control" id="otp" maxlength="8" name="otp" oninput="return numbervalidation(this)" placeholder="Enter OTP" type="text" value=""/>
+                                                        <input class="form-control" data-val="true" data-val-length="The field sponser_id must be a string with a minimum length of 4 and a maximum length of 12." data-val-length-max="12" data-val-length-min="4" data-val-required="Sponser Id is required" id="sponser_id" maxlength="6" name="sponser_id" oninput="return numbervalidation(this)" placeholder="Enter Sponsor Id" required="required" type="text" value="" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="floating-label form-group">
+                                                        <input class="form-control floating-input" id="sponsername" name="sponsername" placeholder="Sponsor Name" readonly="true" type="text" value="" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <div class="floating-label form-group">
+                                                        <input class="form-control" data-val="true" data-val-length="The field User name must be a string with a minimum length of 1 and a maximum length of 50." data-val-length-max="50" data-val-length-min="1" data-val-required="The User name field is required." id="f_name" name="f_name" oninput="return namevalidation(this)" placeholder="User Name" required="required" type="text" value="" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="floating-label form-group">
+                                                        <input class="floating-input form-control" data-val="true" data-val-required="Mobile number is required" id="mobile" maxlength="10" name="mobile" oninput="return numbervalidation(this)" placeholder="Mobile Number" required="required" type="text" value="" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <div class="floating-label form-group">
+                                                        <input class="form-control input-log-cls" data-val="true" data-val-email="Invalid Email Address" id="email" name="email" placeholder="example@gmail.com" required="required" type="text" value="" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-lg-12" id="sendbtndiv">
+                                                            <button type="button" id="sendotpbtn" class="btn btn-success mb-2 btn-md">Send OTP For Email Verification</button>
+                                                        </div>
+                                                        <div class="col-md-6" id="resendbtndiv" style={{ display: "none" }}>
+                                                            <button type="button" id="resendotpbtn" class="btn btn-success btn-md">Resend OTP</button>
+                                                        </div>
+                                                        <div class="col-md-6" id="otpdiv" style={{ display: "none" }}>
+                                                            <div class="floating-label form-group">
+                                                                <input class="floating-input form-control" id="otp" maxlength="8" name="otp" oninput="return numbervalidation(this)" placeholder="Enter OTP" type="text" value="" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="floating-label form-group">
+                                                        <input class="floating-input form-control" data-val="true" data-val-length="Enter minimum 5 character" data-val-length-max="50" data-val-length-min="5" data-val-required="The password field is required." id="password" name="password" placeholder="Password" required="required" type="password" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="floating-label form-group">
+                                                        <input class="floating-input form-control" data-val="true" data-val-equalto="The password and confirmation password do not match." data-val-equalto-other="*.password" data-val-required="The confirmpassword field is required." id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" required="required" type="password" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="custom-control custom-checkbox mb-3">
+                                                        <input class="" data-val="true" data-val-required="The TermsAndConditions field is required." id="TermsAndConditions" name="TermsAndConditions" type="checkbox" value="true" /><input name="TermsAndConditions" type="hidden" value="false" />
+                                                        <label class="" for="customCheck1">I Agree Your <a href="#" className='text-prim'>Terms and Conditions</a></label>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="floating-label form-group">
-                                                <input class="floating-input form-control" data-val="true" data-val-length="Enter minimum 5 character" data-val-length-max="50" data-val-length-min="5" data-val-required="The password field is required." id="password" name="password" placeholder="Password" required="required" type="password"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="floating-label form-group">
-                                                <input class="floating-input form-control" data-val="true" data-val-equalto="The password and confirmation password do not match." data-val-equalto-other="*.password" data-val-required="The confirmpassword field is required." id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" required="required" type="password"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="custom-control custom-checkbox mb-3">
-                                                <input class="" data-val="true" data-val-required="The TermsAndConditions field is required." id="TermsAndConditions" name="TermsAndConditions" type="checkbox" value="true"/><input name="TermsAndConditions" type="hidden" value="false"/>
-                                                <label class="" for="customCheck1">I Agree Your <a href="#" className='text-prim'>Terms and Conditions</a></label>
-                                            </div>
-                                        </div>
+                                            <button type="submit" class="btn btn-prim">Sign Up</button>
+                                            <p class="mt-3">
+                                                Already have an Account <Link to="/Login_main"><a href="login.html" class="text-primary">Sign In</a></Link>
+                                            </p>
+                                        </form>
                                     </div>
-                                    <button type="submit" class="btn btn-prim">Sign Up</button>
-                                    <p class="mt-3">
-                                        Already have an Account <Link to="/Login_main"><a href="login.html" class="text-primary">Sign In</a></Link> 
-                                    </p>
-                                </form>                            
-                             </div>
-                         </div>
-                            <div class="col-lg-6 mb-lg-0 mb-4 mt-lg-0 mt-4">
-                                <img src="1.webp" class="img-fluid w-80" alt=""/>
+                                </div>
+                                <div class="col-lg-6 mb-lg-0 mb-4 mt-lg-0 mt-4">
+                                    <img src="1.webp" class="img-fluid w-80" alt="" />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    </div>
+            </section>
+        </div>
 
 
 
@@ -364,7 +365,7 @@ console.log("position",position);
         //             <div className="row ">
         //                 <div className="col-md-2"></div>
         //                 <div className="col-md-4 hvr">
-                            
+
         //                 </div>
 
         //                 <div className="col-md-4 hvr">

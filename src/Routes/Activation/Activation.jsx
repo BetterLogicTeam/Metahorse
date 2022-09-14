@@ -12,14 +12,13 @@ import Web3 from "web3";
 import moment from "moment";
 
 
-import {
-    contractAddress, contractAbi
-} from "../../Utils/contract";
+
 import {
     tokenAddress, tokenAbi
 } from "../../Utils/token";
 import { loadWeb3 } from "../../api";
 import axios from "axios";
+import { wireNftContractAbi, wireNftContractAddress } from "../../utilies/constant";
 
 export const Activate = () => {
 
@@ -234,9 +233,9 @@ export const Activate = () => {
 
 
             try {
-                let contract = await new window.web3.eth.Contract(contractAbi, contractAddress)
+                let contract = await new window.web3.eth.Contract(wireNftContractAbi, wireNftContractAddress)
                 let token = await new window.web3.eth.Contract(tokenAbi, tokenAddress)
-                let approveCall = await token.methods.approve(contractAddress, ULE_rate).send({ from: acc });
+                let approveCall = await token.methods.approve(wireNftContractAddress, ULE_rate).send({ from: acc });
                 toast.success('Approved')
                 let sellCall = await contract.methods.sell(ULE_rate).send({ from: acc, value: tron_Rate });
                 toast.success('Transection Succesfull')
@@ -439,9 +438,9 @@ export const Activate = () => {
             // console.log("mainadd",uid);
 
             try {
-                let contract = await new window.web3.eth.Contract(contractAbi, contractAddress)
+                let contract = await new window.web3.eth.Contract(wireNftContractAbi, wireNftContractAddress)
                 let token = await new window.web3.eth.Contract(tokenAbi, tokenAddress)
-                let approveCall = await token.methods.approve(contractAddress, ULE_rate).send({ from: address });
+                let approveCall = await token.methods.approve(wireNftContractAddress, ULE_rate).send({ from: address });
                 toast.success('Approved')
                 let sellCall = await contract.methods.sell(ULE_rate).send({ from: address, value: tron_Rate });
                 toast.success('Transection Succesfull')
@@ -580,7 +579,7 @@ export const Activate = () => {
                                 <div className="input_and_text">
 
                                     <h6 className="modal-title  col-12 pb-4" style={{ color: "white" }}
-                                     
+
                                         id="exampleModal3Label2"
                                     >
                                         Live Rate :
@@ -664,54 +663,54 @@ export const Activate = () => {
                                             </div>
                                         </div>
                                         <div className="btn_here">
-                                        <div
-                                            className="col-12 col-md-6 col-xl-4 p-3"
-                                            style={{
-                                                display: "flex",
-                                                alignItems: "flex-end",
-                                                // marginLeft: '11%'
-                                            }}
-                                        >
-                                            {apiDate && (
-                                                <>
-                                                    {isLoadingTrans ? (
-                                                        <button
-                                                            className="btn btn-success"
-                                                            style={{ marginTop: "10px" }}
-                                                            id="btnother"
-                                                        >
-                                                            <div
-                                                                className="loaders"
-                                                                style={{
-                                                                    height: "30px",
-                                                                    width: "30px",
-                                                                }}
-                                                            ></div>
-                                                            Transaction is in progress
-                                                        </button>
-                                                    ) : (
-                                                        <button
-                                                            className="lg-btn"
-                                                            style={{ minHeight: "45px", borderRadius: '6px', color: 'white' }}
-                                                            onClick={() => handleUpdation()}
-                                                        >
-                                                            {/* <img
+                                            <div
+                                                className="col-12 col-md-6 col-xl-4 p-3"
+                                                style={{
+                                                    display: "flex",
+                                                    alignItems: "flex-end",
+                                                    // marginLeft: '11%'
+                                                }}
+                                            >
+                                                {apiDate && (
+                                                    <>
+                                                        {isLoadingTrans ? (
+                                                            <button
+                                                                className="btn btn-success"
+                                                                style={{ marginTop: "10px" }}
+                                                                id="btnother"
+                                                            >
+                                                                <div
+                                                                    className="loaders"
+                                                                    style={{
+                                                                        height: "30px",
+                                                                        width: "30px",
+                                                                    }}
+                                                                ></div>
+                                                                Transaction is in progress
+                                                            </button>
+                                                        ) : (
+                                                            <button
+                                                                className="lg-btn"
+                                                                style={{ minHeight: "45px", borderRadius: '6px', color: 'white' }}
+                                                                onClick={() => handleUpdation()}
+                                                            >
+                                                                {/* <img
                                             src="assets/activateBlack.png"
                                             className="whImg"
                                           /> */}
-                                                            <img
-                                                                style={{ width: "14%", marginRight: '5px' }}
-                                                                src={logo}
-                                                                className="yellowImg "
-                                                            />
-                                                            Upgrade
-                                                        </button>
-                                                    )}
-                                                </>
-                                            )}
+                                                                <img
+                                                                    style={{ width: "14%", marginRight: '5px' }}
+                                                                    src={logo}
+                                                                    className="yellowImg "
+                                                                />
+                                                                Upgrade
+                                                            </button>
+                                                        )}
+                                                    </>
+                                                )}
+                                            </div>
                                         </div>
-                                        </div>
-                                        
+
                                     </div>
                                 </div>
                                 {/* <div className="yeep_note">

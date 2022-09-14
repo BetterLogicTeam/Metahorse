@@ -1,48 +1,48 @@
-.home img{
+.home img {
     width: 120px;
 }
 
-.nev{
+.nev {
     color: white !important;
     width: 100%;
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     z-index: 5;
-  background-color: #3a1f05 !important;
-  box-shadow: 0 5px 5px rgb(0 0 0 / 20%);
+    background-color: #3a1f05 !important;
+    box-shadow: 0 5px 5px rgb(0 0 0 / 20%);
 }
 
-.navbar-collapse{
+.navbar-collapse {
     margin-top: 70px;
 }
 
-.alna{
+.alna {
     margin-left: 4rem;
     margin-top: -40px;
     margin-bottom: 35px;
 
 }
 
-.hxn{
+.hxn {
     margin-right: 9px;
     font-size: 17px;
-    
+
 }
 
-.emn{
+.emn {
     margin-top: -40px;
     margin-bottom: 35px;
 
 }
 
 @media screen and (max-width:800px) {
-    .alna{
+    .alna {
         text-align: center;
         margin: 0px;
         padding: 0;
     }
 
-    .emn{
+    .emn {
         text-align: center;
         margin-top: 1px;
     }
@@ -50,21 +50,21 @@
 
 @media (min-width:800px) and (max-width:1024px) {
 
-    .alna{
+    .alna {
         margin-left: .5rem;
     }
-    
-    .hxn{
+
+    .hxn {
         margin-right: 0px;
     }
 
-    .wallet{
+    .wallet {
         margin-right: 2px !important;
         font-size: 16px !important;
     }
 }
 
-.wallet{
+.wallet {
     color: chocolate !important;
     font-size: 20px;
     margin-right: 5px;
