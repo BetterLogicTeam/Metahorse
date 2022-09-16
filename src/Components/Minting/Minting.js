@@ -225,7 +225,7 @@ export default function Minting({ setModalShow, btnTxt }) {
 
                 if (parseInt(ttlSupply) < parseInt(maxSupply)) {
                     console.log("mintingWirePrice", paused);
-                    if (paused !== false) {
+                    if (paused == false) {
                         if (value < parseInt(maxLimitprTransaction)) {
                             if (parseFloat(userBusdBalance) >= totalMintingPriceWire) {
 
@@ -233,10 +233,10 @@ export default function Minting({ setModalShow, btnTxt }) {
                                 totalMintingPriceWire = web3.utils.toWei(totalMintingPriceWire.toString())
                                 console.log("totalMintingPriceWire", totalMintingPriceWire);
 
-                                // await wireContractOf.methods.approve(wireNftContractAddress, totalMintingPriceWire).send({
-                                //     from: acc
-                                // })
-                                // toast.success("Transaction Approved")
+                                await wireContractOf.methods.approve(wireNftContractAddress, totalMintingPriceWire).send({
+                                    from: acc
+                                })
+                                toast.success("Transaction Approved")
                                 setButtonTwo("Please Wait for Second Confirmation")
                                 let totalMintingPriceWirereponce = await nftContractOf.methods.mint_with_token(value, totalMintingPriceWire.toString()).send({
                                     from: acc,
