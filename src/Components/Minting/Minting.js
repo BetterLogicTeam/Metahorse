@@ -173,10 +173,13 @@ export default function Minting({ setModalShow, btnTxt }) {
         try {
             const web3 = window.web3;
             let nftContractOf = new web3.eth.Contract(wireNftContractAbi, wireNftContractAddress);
-            let mintingWirePrice = await nftContractOf.methods.MinitngPricein_wire().call()
+            // let mintingWirePrice = await nftContractOf.methods.ValueinULE().call()
+            let mintingWirePrice = await nftContractOf.methods.ValueinULE().call()
+
             mintingWirePrice = web3.utils.fromWei(mintingWirePrice);
             mintingWirePrice = parseFloat(mintingWirePrice)
-            console.log("Dattattaa", mintingWirePrice);
+            mintingWirePrice = mintingWirePrice;
+            console.log("Dattattaa", (mintingWirePrice));
             setmintPriceWire(mintingWirePrice);
 
         } catch (e) {
@@ -194,22 +197,24 @@ export default function Minting({ setModalShow, btnTxt }) {
         } else {
             try {
                 setButtonTwo("Please Wait While Processing")
-                console.log("mintFor Wire");
+                console.log("mintFor Wire", acc);
                 const web3 = window.web3;
                 let nftContractOf = new web3.eth.Contract(wireNftContractAbi, wireNftContractAddress);
                 let wireContractOf = new web3.eth.Contract(wireTokenAbi, wireTokenAddress);
+
                 let userBusdBalance = await wireContractOf.methods.balanceOf(acc).call();
+                console.log("maxSupply", userBusdBalance);
                 userBusdBalance = web3.utils.fromWei(userBusdBalance)
                 let maxSupply = await nftContractOf.methods.maxsupply().call();
                 let ttlSupply = await nftContractOf.methods.totalSupply().call();
                 let paused = await nftContractOf.methods.paused().call();
                 let maxLimitprTransaction = await nftContractOf.methods.MaxLimitPerTransaction().call();
-                let mintingWirePrice = await nftContractOf.methods.MinitngPricein_wire().call()
+                let mintingWirePrice = await nftContractOf.methods.ValueinULE().call()
                 mintingWirePrice = web3.utils.fromWei(mintingWirePrice);
                 mintingWirePrice = parseFloat(mintingWirePrice)
+                console.log('what is minting price', mintingWirePrice)
                 setmintPriceWire(mintingWirePrice);
                 let totalMintingPriceWire = value * mintingWirePrice
-                console.log("maxSupply", maxSupply);
 
 
                 // let llisted_check = await nftContractOf.methods.iswhitelist(acc).call()
@@ -228,12 +233,12 @@ export default function Minting({ setModalShow, btnTxt }) {
                                 totalMintingPriceWire = web3.utils.toWei(totalMintingPriceWire.toString())
                                 console.log("totalMintingPriceWire", totalMintingPriceWire);
 
-                                await wireContractOf.methods.approve(wireNftContractAddress, totalMintingPriceWire).send({
-                                    from: acc
-                                })
-                                toast.success("Transaction Approved")
+                                // await wireContractOf.methods.approve(wireNftContractAddress, totalMintingPriceWire).send({
+                                //     from: acc
+                                // })
+                                // toast.success("Transaction Approved")
                                 setButtonTwo("Please Wait for Second Confirmation")
-                                let totalMintingPriceWirereponce = await nftContractOf.methods.mint_with_wire(value, totalMintingPriceWire.toString(), acc).send({
+                                let totalMintingPriceWirereponce = await nftContractOf.methods.mint_with_token(value, totalMintingPriceWire.toString()).send({
                                     from: acc,
                                 })
                                 let ress = await axios.post('https://metahorse.herokuapp.com/buynfttoken', {
@@ -437,7 +442,7 @@ export default function Minting({ setModalShow, btnTxt }) {
     //             // mintingBusdPrice = parseFloat(mintingBusdPrice)
     //             // setMintPriceBUSD(mintingBusdPrice)
 
-    //             let mintingWirePrice = await nftContractOf.methods.MinitngPricein_wire().call()
+    //             let mintingWirePrice = await nftContractOf.methods.ValueinULE().call()
     //             mintingWirePrice = web3.utils.fromWei(mintingWirePrice);
     //             mintingWirePrice = parseFloat(mintingWirePrice)
     //             setmintPriceWire(mintingWirePrice);
@@ -669,72 +674,9 @@ export default function Minting({ setModalShow, btnTxt }) {
             <Header />
             <div className='main_div_app wallet-section' >
                 <div class="container ">
-                    <div class="bx-view  border">
+                    <div class="bx-view ">
                         <div class="bx-full">
-                            <div class="bx-header">
-                                <div class="header-inner">
-                                    <div class="header-tab center">
-                                        <ul>
-                                            <li class="active">
-                                                <div class="item-tab">
-                                                    {/* <div class="item-tab-icon">
-                                                        <div className='items_tab_inneree'>
-                                                            <img alt="" src={horse} decoding="async" data-nimg="fixed" className='items_img_here img-fluid' />
-                                                            <noscript></noscript>
-                                                        </div>
-                                                    </div> */}
-                                                    {/* <Link to="/Items/Mint" className='text_de'>
 
-                                                        <span class="item-tab-title active">MINT</span>
-                                                    </Link> */}
-                                                </div>
-                                            </li>
-                                            <li class="">
-                                                <div class="item-tab ">
-                                                    {/* <div class="item-tab-icon">
-                                                        <div className='items_tab_inneree'>
-                                                            <img alt="" src="https://cdn.pegaxy.io/statics/play/v9/images/icon/ic_item.png" decoding="async" data-nimg="fixed" className='items_img_here' />
-                                                            <noscript></noscript>
-                                                        </div>
-                                                    </div> */}
-                                                    {/* <Link to="/Items/My_Items" className='text_de'>
-
-                                                        <span class="item-tab-title ">COLLECTION</span>
-                                                    </Link> */}
-                                                </div>
-                                            </li>
-                                            {/* <li class="">
-                                                <div class="item-tab">
-                                                    <div class="item-tab-icon">
-                                                        <div className='items_tab_inneree'>
-                                                            <img alt="" src="https://cdn.pegaxy.io/statics/play/v9/images/icon/ic_tickets.png" decoding="async" data-nimg="fixed" className='items_img_here' />
-                                                            <noscript></noscript>
-                                                        </div>
-                                                    </div>
-                                                    <Link to="/My_Bids" className='text_de'>
-                                                        <span class="item-tab-title ">My Bids</span>
-
-                                                    </Link>
-                                                </div>
-                                            </li> */}
-                                            {/* <li class="">
-                                                <div class="item-tab">
-                                                    <div class="item-tab-icon">
-                                                        <div className='items_tab_inneree'>
-                                                            <img alt="" src="https://cdn.pegaxy.io/statics/play/v9/images/icon/ic_tickets.png" decoding="async" data-nimg="fixed" className='items_img_here' />
-                                                            <noscript></noscript>
-                                                        </div>
-                                                    </div>
-                                                    <Link to="/Items/My_Profile" className='text_de'>
-
-                                                        <span class="item-tab-title">My Profit</span>
-                                                    </Link>
-                                                </div>
-                                            </li> */}
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="bx-content default  minting_hereeeee">
                                 <div class="inner-content minting_page">
                                     {
@@ -748,14 +690,14 @@ export default function Minting({ setModalShow, btnTxt }) {
                                             <div class="viewPega">
                                                 <div className="innerdiv_mint">
                                                     <div className="row">
-                                                        <div className="col-lg-5 mt-4">
+                                                        <div className="col-lg-5">
                                                             <div className="inner_first_div_img">
                                                                 <img src={horse} alt="" width="100%" className='minting_img' />
                                                             </div>
                                                         </div>
                                                         {/* <div className="col-lg-6 mt-4">
                                                             <div className="mint_div_main"> */}
-                                                        <div class=" col-lg-7 col-md-12 d-flex flex-column justify-content-start align-items-flex-start">
+                                                        <div class=" col-lg-7 mt-lg-5 col-md-12 d-flex flex-column justify-content-start align-items-flex-start">
 
 
 
@@ -781,20 +723,11 @@ export default function Minting({ setModalShow, btnTxt }) {
                                                                 </div> */}
                                                                 <div className='d-flex justify-content-center align-items-center mt-lg-5 mt-3'>
                                                                     <a href="#" class="default-btn move-right" onClick={() => handleShow()}>
-                                                                        <span>Mint with wire</span>{" "}
+                                                                        <span>Mint with Oud NFT</span>{" "}
                                                                     </a>
-                                                                    <p className='stakepageP text-white ms-4 mt-2 fs-5 fw-3'>Price : {mintPriceWire} Wire</p>
+                                                                    <p className='stakepageP text-white ms-4 mt-2 fs-5 fw-3'>Price : {mintPriceWire.toFixed(2)} OUD</p>
                                                                 </div>
-                                                                {/* <div className='d-flex justify-content-center align-items-center mt-lg-5 mt-3'>
-                                                                            <button onClick={() => myMintWire()} className='btn mintbtn '>{btnTwo}</button>
-                                                                            <p className='stakepageP text-white ms-4 mt-2 fs-5 fw-3'>Price :{mintPriceWire} JTO</p>
 
-                                                                        </div>
-                                                                        <div className='d-flex justify-content-center align-items-center mt-lg-5 mt-3'>
-                                                                            <button onClick={() => myMintBUSD()} className='btn mintbtn firstbtn ms-4'>{btnThree}</button>
-                                                                            <p className='stakepageP text-white ms-4 mt-2 fs-5 fw-3'>Price : {mintPriceBUSD} BUSD</p>
-
-                                                                        </div> */}
 
                                                             </div>
 
@@ -902,10 +835,6 @@ export default function Minting({ setModalShow, btnTxt }) {
 
                     </div>
                 </div>
-
-
-
-
 
             </div>
             <Footer />
