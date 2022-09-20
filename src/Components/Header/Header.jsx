@@ -39,8 +39,8 @@ function CollapsibleExample() {
               <Nav.Link href="#how_to_play" className="hxn text-white">
                 <Link to="/How_to_play_main">How To Play</Link>
               </Nav.Link>
-              <Nav.Link href="#tokenomics" className="hxn text-white">
-                <Link to="/Tokenomics_main">Tokenomics</Link>
+              <Nav.Link href="https://lra-game.netlify.app/Items/Mint" target='_blank' className="hxn text-white">
+                Play Now
               </Nav.Link>
               <Nav.Link href="#pricing" className="hxn text-white">
                 Marketplace

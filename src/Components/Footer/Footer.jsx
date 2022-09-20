@@ -106,7 +106,7 @@ function Footer() {
          </div>
          <div class="footer-bottom">
             <div class="container">
-               <p class="text-center py-4 mb-0">All rights reserved &copy; metahorse.pro 
+               <p class="text-center py-4 mb-0">All rights reserved &copy; uletron.live  
                </p>
             </div>
          </div>
